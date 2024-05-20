@@ -1,6 +1,8 @@
 package com.ssu.intercalendar.location.domain;
 
-import jakarta.persistence.Entity;
+import com.ssu.intercalendar.group.domain.Group;
+import com.ssu.intercalendar.user.domain.User;
+import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -9,14 +11,21 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 public class Location {
-    private String group_id;
-    private String user_id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
     private String location_name;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    private User user;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "group_id")
+    private Group group;
 
     @Builder
-    public Location(String group_id, String user_id, String location_name) {
-        this.group_id = group_id;
-        this.user_id = user_id;
+    public Location(String location_name) {
         this.location_name = location_name;
     }
 }
