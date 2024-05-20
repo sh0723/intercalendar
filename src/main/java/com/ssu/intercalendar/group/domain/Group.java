@@ -10,11 +10,12 @@ import lombok.NoArgsConstructor;
 @Entity
 @Getter
 @NoArgsConstructor
+@Table(name = "team")
 public class Group {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String group_name;
+    private String groupName;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "owner_user_id")
@@ -22,8 +23,7 @@ public class Group {
 
 
     @Builder
-    public Group(Long id, String group_name) {
-        this.id = id;
-        this.group_name = group_name;
+    public Group(String groupName) {
+        this.groupName = groupName;
     }
 }

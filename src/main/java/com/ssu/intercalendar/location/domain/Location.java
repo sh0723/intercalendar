@@ -14,8 +14,8 @@ public class Location {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private String locationName;
 
-    private String location_name;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
@@ -25,7 +25,7 @@ public class Location {
     private Group group;
 
     @Builder
-    public Location(String location_name) {
-        this.location_name = location_name;
+    public Location(String locationName) {
+        this.locationName = locationName;
     }
 }

@@ -3,6 +3,7 @@ package com.ssu.intercalendar.group.domain;
 
 import com.ssu.intercalendar.user.domain.User;
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -12,9 +13,7 @@ import lombok.NoArgsConstructor;
 public class UserGroup {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public Long id;
-
-
+    private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
@@ -23,4 +22,10 @@ public class UserGroup {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "group_id")
     private Group group;
+
+    @Builder
+    public UserGroup(User user, Group group) {
+        this.user = user;
+        this.group = group;
+    }
 }
