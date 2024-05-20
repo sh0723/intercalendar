@@ -6,8 +6,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class IntercalendarApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(IntercalendarApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(IntercalendarApplication.class, args);
+    }
 
 }
