@@ -12,19 +12,21 @@ public class User {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String username;
+
+    private String userName;
     private String password;
-
-
+    private String email;
 
     @Builder
-    public User(String username, String password){
-        this.username = username;
+    public User(String userName, String password, String email){
+        this.userName = userName;
         this.password = password;
+        this.email = email;
     }
 
-
-    public void updatePassword(String password) {
+    public void updatePassword(String userName, String password, String email) {
+        this.userName = userName;
         this.password = password;
+        this.email = email;
     }
 }

@@ -11,10 +11,12 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 public class Location {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id; //PK는 DB가 만들어주니깐 생성자 만들 때 포함 안 시켜도 됨.
+
     private String locationName;
+    private Double posX;
+    private Double posY;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
@@ -25,7 +27,11 @@ public class Location {
     private Group group;
 
     @Builder
-    public Location(String locationName) {
+    public Location(String locationName, Double posX, Double posY, User user, Group group) {
         this.locationName = locationName;
+        this.posX = posX;
+        this.posY = posY;
+        this.user = user;
+        this.group = group;
     }
 }
