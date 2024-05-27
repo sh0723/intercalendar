@@ -33,19 +33,18 @@ public class UserController {
     }
 
     @PostMapping("/api/login")
-    public HttpStatus login(@RequestBody LoginRequest loginRequest)
+    public HttpStatus login(@RequestBody LoginRequest loginRequest, HttpServletRequest request, HttpServletResponse response)
     {
-        userService.login(loginRequest);
+        userService.login(loginRequest, request, response);
         return HttpStatus.OK;
     }
 
     @GetMapping("/api/test")
-    public Object test(@AuthenticationPrincipal SessionUser sessionUser)
+    public Object test(@AuthenticationPrincipal SessionUser sessionUser) // 그냥 User X.  로그인 안돼있으면 널
     {
-//        return sessionUser.getUser();
-        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        return principal;
-
+//        (sessionUser == null)
+        //return sessionUser.getUser();
+        return sessionUser.getUser();
     }
 
     @GetMapping("/api/logout")

@@ -25,26 +25,18 @@ public class User {
     private String password;
 
 
-    @ElementCollection(fetch = FetchType.EAGER)
-    @CollectionTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"))
     @Enumerated(EnumType.STRING)
-    private Collection<Role> roles = new HashSet<>();
+    private Role role;
 
-    public User addRole(Role role) {
-        this.roles.add(role);
-        return this;
-    }
+
     @Builder
     public User(String email, String username, String password) {
         this.email = email;
         this.username = username;
         this.password = password;
-
+        this.role = Role.ROLE_USER;
     }
 
-    public Object getRole() {
-        return roles;
-    }
 }
 
 
