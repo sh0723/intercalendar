@@ -4,6 +4,7 @@ import ch.qos.logback.core.Context;
 import com.ssu.intercalendar.user.domain.User;
 import com.ssu.intercalendar.user.dto.LoginRequest;
 import com.ssu.intercalendar.user.dto.RegisterRequest;
+import com.ssu.intercalendar.user.enumerate.Role;
 import com.ssu.intercalendar.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -14,6 +15,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+
 @Service
 @RequiredArgsConstructor
 public class UserService {
@@ -23,7 +25,7 @@ public class UserService {
 
     public boolean register(RegisterRequest registerRequest)
     {
-        User user = User.builder().username(registerRequest.username).email(registerRequest.email).password(encoder.encode(registerRequest.password)).build();
+        User user = User.builder().username(registerRequest.username).email(registerRequest.email).password(encoder.encode(registerRequest.password)).build().addRole(Role.ROLE_USER);
         userRepository.save(user);
         return true;
     }

@@ -1,6 +1,8 @@
 package com.ssu.intercalendar.security.config;
 
+import com.ssu.intercalendar.security.service.CustomUserDetailsService;
 import com.ssu.intercalendar.security.service.LoginSuccessHandler;
+import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -12,7 +14,11 @@ import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
 @EnableWebSecurity
+@AllArgsConstructor
 public class SecurityConfig {
+
+    private final CustomUserDetailsService customUserDetailsService;
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception{
         httpSecurity
@@ -20,7 +26,12 @@ public class SecurityConfig {
                         .anyRequest().permitAll())
                 .formLogin((formLogin) -> formLogin.loginProcessingUrl("/api/login")
                         .successHandler(new LoginSuccessHandler()))
-                        .csrf((csrf) -> csrf.disable());
+                .logout(logout -> logout
+                .logoutUrl("/api/logout")  // 로그아웃 URL 설정
+                .invalidateHttpSession(true)  // 세션 무효화
+                .deleteCookies("JSESSIONID")  // 쿠키 삭제
+                .logoutSuccessUrl("/login?logout"))
+                .csrf((csrf) -> csrf.disable());
 
 
         return httpSecurity.build();

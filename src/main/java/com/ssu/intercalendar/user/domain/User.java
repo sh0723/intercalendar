@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
 
 @Entity
@@ -24,16 +25,26 @@ public class User {
     private String password;
 
 
+    @ElementCollection(fetch = FetchType.EAGER)
+    @CollectionTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"))
     @Enumerated(EnumType.STRING)
-    private Role role;
+    private Collection<Role> roles = new HashSet<>();
 
+    public User addRole(Role role) {
+        this.roles.add(role);
+        return this;
+    }
     @Builder
     public User(String email, String username, String password) {
         this.email = email;
         this.username = username;
         this.password = password;
+
     }
 
+    public Object getRole() {
+        return roles;
+    }
 }
 
 
