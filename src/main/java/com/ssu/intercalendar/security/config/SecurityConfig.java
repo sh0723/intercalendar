@@ -9,6 +9,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
@@ -24,14 +25,10 @@ public class SecurityConfig {
         httpSecurity
                 .authorizeHttpRequests((authorize) -> authorize
                         .anyRequest().permitAll())
-                .formLogin((formLogin) -> formLogin.loginProcessingUrl("/api/login")
-                        .successHandler(new LoginSuccessHandler()))
-                .logout(logout -> logout
-                .logoutUrl("/api/logout")  // 로그아웃 URL 설정
-                .invalidateHttpSession(true)  // 세션 무효화
-                .deleteCookies("JSESSIONID")  // 쿠키 삭제
-                .logoutSuccessUrl("/login?logout"))
-                .csrf((csrf) -> csrf.disable());
+                .csrf((csrf) -> csrf.disable())
+                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED));
+
+
 
 
         return httpSecurity.build();

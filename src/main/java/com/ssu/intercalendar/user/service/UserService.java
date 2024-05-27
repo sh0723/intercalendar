@@ -12,8 +12,11 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 
 @Service
@@ -39,4 +42,11 @@ public class UserService {
         return authentication;
     }
 
+    //SessionUser -> UserDetails implement
+
+    public Optional<User> test(UserDetails userDetails)
+    {
+        Optional<User> user = userRepository.findByUsername(userDetails.getUsername());
+        return user;
+    }
 }
