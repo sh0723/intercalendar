@@ -39,6 +39,7 @@ public class Schedule {
         this.description = description;
     }
 
+
     public void updateSchedule(LocalDate date, String description, LocalTime startTime, LocalTime endTime) {
         this.date = date;
         this.description = description;

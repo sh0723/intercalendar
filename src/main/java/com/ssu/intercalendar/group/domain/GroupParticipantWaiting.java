@@ -2,6 +2,7 @@ package com.ssu.intercalendar.group.domain;
 
 import com.ssu.intercalendar.user.domain.User;
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -20,4 +21,10 @@ public class GroupParticipantWaiting {
     @JoinColumn(name = "group_id")
     private Group group;
 
+    @Builder
+    public GroupParticipantWaiting(User user, Group group) {
+        this.user = user;
+        this.group = group;
+    }
+    //Builder: 생성자 순서 외우기 싫어서 쓰는 것
 }
