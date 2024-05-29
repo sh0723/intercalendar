@@ -1,8 +1,11 @@
 package com.ssu.intercalendar.user.domain;
+
+import com.ssu.intercalendar.user.enumerate.Role;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+
 
 @Entity
 @Getter
@@ -10,23 +13,26 @@ import lombok.NoArgsConstructor;
 
 public class User {
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String userName;
-    private String password;
     private String email;
+    private String username;
+    private String password;
+
+
+    @Enumerated(EnumType.STRING)
+    private Role role;
+
 
     @Builder
-    public User(String userName, String password, String email){
-        this.userName = userName;
-        this.password = password;
+    public User(String email, String username, String password) {
         this.email = email;
-    }
-
-    public void updatePassword(String userName, String password, String email) {
-        this.userName = userName;
+        this.username = username;
         this.password = password;
-        this.email = email;
+        this.role = Role.ROLE_USER;
     }
 }
+
+
