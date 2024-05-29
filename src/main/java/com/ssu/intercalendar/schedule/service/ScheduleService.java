@@ -6,15 +6,10 @@ import com.ssu.intercalendar.schedule.dto.GetScheduleByMonthRequest;
 import com.ssu.intercalendar.schedule.dto.UpdateScheduleRequest;
 import com.ssu.intercalendar.schedule.repository.ScheduleRepository;
 import com.ssu.intercalendar.user.domain.User;
-import com.ssu.intercalendar.user.repository.UserRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
-import java.time.YearMonth;
-import java.util.ArrayList;
 import java.util.List;
 
 
