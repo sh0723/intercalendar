@@ -1,6 +1,5 @@
 package com.ssu.intercalendar.schedule.controller;
 
-import com.fasterxml.jackson.databind.ser.Serializers;
 import com.ssu.intercalendar.common.BaseResponse;
 import com.ssu.intercalendar.schedule.domain.Schedule;
 import com.ssu.intercalendar.schedule.dto.*;
@@ -10,7 +9,6 @@ import com.ssu.intercalendar.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
